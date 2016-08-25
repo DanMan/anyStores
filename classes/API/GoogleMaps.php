@@ -39,7 +39,7 @@ class GoogleMaps
             $arrParams['key'] = \Config::get('anystores_apiKey');
         }
 
-        $strQuery = $strUrl.'?'.http_build_query($arrParams, '', '&', PHP_QUERY_RFC1738);
+        $strQuery = $strUrl.'?'.http_build_query($arrParams, '', '&');
 
         if ( $strCountry )
         {
@@ -81,18 +81,17 @@ class GoogleMaps
         return false;
     }
 
+
     /**
      * Add Javascript library to HTML output.
      */
-    static function includeJs()
+    public static function includeJs($arrParams = array())
     {
-        $params['language'] = $GLOBALS['TL_LANGUAGE'];
-        $apiKey = \Config::get('anystores_apiBrowserKey');
-        if ($apiKey) {
-            $params["key"] = $apiKey;
-        }
+        $arrParams['language'] = $GLOBALS['TL_LANGUAGE'];
+        $arrParams['key']      = \Config::get('anystores_apiBrowserKey');
 
         $GLOBALS['TL_JAVASCRIPT']['googleapis-maps'] = 'https://maps.googleapis.com/maps/api/js?'
-                                                       . http_build_query($params, '', '&');
+                                                       .http_build_query($arrParams, '', '&');
     }
+
 }

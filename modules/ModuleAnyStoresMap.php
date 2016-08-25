@@ -52,7 +52,10 @@ class ModuleAnyStoresMap extends \Module
      */
     protected function compile()
     {
-        GoogleMaps::includeJs();
+        // load Google Maps JavaScript
+        $arrParams = $this->anystores_signedIn ? array('signed_in' => 'true') : array();
+        GoogleMaps::includeJs($arrParams);
+
         $GLOBALS['TL_JAVASCRIPT']['anystores']       = 'system/modules/anyStores/assets/js/anystores.js';
         $GLOBALS['TL_JAVASCRIPT']['markerclusterer'] = 'system/modules/anyStores/assets/js/markerclusterer/src/markerclusterer_compiled.js';
 
