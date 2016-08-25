@@ -912,13 +912,10 @@ class tl_anystores extends Backend
     public function fillCoordinates(DataContainer $dc)
     {
         // Return if both are set
-        if
-        (
-            !empty((float) $dc->activeRecord->latitude) &&
-            !empty((float) $dc->activeRecord->longitude)
-        )
-        {
-            return;
+        if (
+            !empty($dc->activeRecord->latitude) && !empty($dc->activeRecord->longitude)
+        ) {
+            return false;
         }
         
         // Get country name
