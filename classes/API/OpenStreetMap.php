@@ -37,7 +37,10 @@ class OpenStreetMap
             $strQuery .= '&countrycodes='.$strCountry;
         }
 
-        $objRequest = new \Request();
+        if(class_exists('ProxyRequest'))
+            $objRequest = new \ProxyRequest();
+        else
+            $objRequest = new \Request();
         $objRequest->send($strQuery);
 
         // Return on error

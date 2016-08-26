@@ -46,7 +46,10 @@ class GoogleMaps
             $strQuery .= '&components=country:'.strtoupper($strCountry);
         }
 
-        $objRequest = new \Request();
+        if(class_exists('ProxyRequest'))
+            $objRequest = new \ProxyRequest();
+        else
+            $objRequest = new \Request();
         $objRequest->send($strQuery);
 
         if ( !$objRequest->hasError() )
