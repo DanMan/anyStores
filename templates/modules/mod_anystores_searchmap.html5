@@ -12,7 +12,7 @@ function initialize()
 
     var markers = [];
 
-    for (var i = 0; i < stores.length; i++)
+    for (var i = 0, jj=stores.length; i < jj; i++)
     {
         var store = stores[i];
 
@@ -21,23 +21,27 @@ function initialize()
             title: store.name
         });
 
-        if ( store.marker )
-        {
-            marker.setIcon(store.marker);
-        }
+        if(store.marker) marker.setIcon(store.marker);
 
         var infowindow = new google.maps.InfoWindow();
 
         google.maps.event.addListener(marker, 'click', (function(marker, i) {
 
-            var html = "<b><a href=\"" + store.href + "\">" + store.name + "</a></b><br>";
+            var html = '<p class="mapaddress"><span class="name">';
+            if(store.href)
+                html += '<a href="' + store.href + '">' + store.name + "</a>";
+            else
+                html += store.name;
+            html += '</span>';
 
-            (store.street !="") ? html += store.street  + "<br>" : "";
-            (store.city !="")   ? html += store.postal  + " " +  store.city  + "<br>" : "";
-            (store.phone !="")  ? html += store.phone  + "<br>" : "";
-            (store.url !="")    ? html += "<a href=\"" + store.url  + "\">" + store.url  + "</a><br>" : "";
-            (store.email !="")  ? html += "<a href=\"mailto:" + store.email  + "\">" + store.email  + "</a><br>" : "";
-            (store.href !="")   ? html += "<br><a href=\"" + store.href + "\">Mehr Informationen</a>" : "";
+            if(store.street !="") html += '<br><span class="street">' + store.street  + "</span>";
+            if(store.city !="")   html += '<br><span class="postal">' + store.postal  + " " +  store.city  + "</span>";
+            if(store.phone !="")  html += '<br><span class="phone">' + store.phone  + "</span>";
+            if(store.url !="")    html += '<br><a class="url" href="' + store.url  + '">' + store.url  + "</a>";
+            if(store.email !="")  html += '<br><a class="email" href="mailto:' + store.email  + '">' + store.email  + "</a>";
+            if(store.href)        html += '<br><a class="more" href="' + store.href +
+                '"><?=$GLOBALS['TL_LANG']['anystores']['more']?></a>';
+            html += '</p>';
 
             return function() {
                 infowindow.setContent(html);

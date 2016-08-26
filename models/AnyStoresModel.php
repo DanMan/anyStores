@@ -226,7 +226,7 @@ class AnyStoresModel extends \Model
 
     /**
      * Get the details from a store
-     * @return \AnyStoresModel
+     * @return AnyStoresModel
      */
     public function loadDetails()
     {

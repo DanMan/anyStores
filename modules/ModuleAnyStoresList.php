@@ -17,7 +17,7 @@ class ModuleAnyStoresList extends \Module
 {
 
     /**
-     * Template
+     * Template name
      * @var string
      */
     protected $strTemplate = 'mod_anystores_list';
